@@ -18,8 +18,9 @@ training_Y = cell(size(trainingVehicles, 1), 1);
 trainingVehData = df(ismember(df.veh_id,trainingVehicles),:);
 %%
 tic;
-
+% finding groups
 G = findgroups(trainingVehData.veh_id);
+% doing split apply combine routine for UDF
 outPut = splitapply(@prepareData, ...
     trainingVehData(:, ["time", "x", "y", "speed", 'acc', "angle", ...
         "leadVehicleSpeed", "leadVehicleX", "leadVehicleY"]), G);
